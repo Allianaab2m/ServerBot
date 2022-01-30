@@ -2,7 +2,7 @@ import './lib/setup';
 import { LogLevel, SapphireClient } from '@sapphire/framework';
 
 const client = new SapphireClient({
-	defaultPrefix: 'dr!',
+	defaultPrefix: 'ab.',
 	regexPrefix: /^(hey +)?bot[,! ]/i,
 	caseInsensitiveCommands: true,
 	logger: {
