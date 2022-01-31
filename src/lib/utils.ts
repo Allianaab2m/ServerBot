@@ -20,3 +20,16 @@ export function pickRandom<T>(array: readonly T[]): T {
 export function sendLoadingMessage(message: Message): Promise<typeof message> {
 	return send(message, { embeds: [new MessageEmbed().setDescription(pickRandom(RandomLoadingMessage)).setColor('#FF0000')] });
 }
+
+export function shuffle<T>(array: T[]): T[] {
+	var n = array.length;
+	var temp, i;
+
+	while (n) {
+		i = Math.floor(Math.random() * n--);
+		temp = array[n];
+		array[n] = array[i];
+		array[i] = temp;
+	}
+	return array;
+}
