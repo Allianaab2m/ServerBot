@@ -22,14 +22,12 @@ export function sendLoadingMessage(message: Message): Promise<typeof message> {
 }
 
 export function shuffle<T>(array: T[]): T[] {
-	var n = array.length;
-	var temp, i;
-
-	while (n) {
-		i = Math.floor(Math.random() * n--);
-		temp = array[n];
-		array[n] = array[i];
-		array[i] = temp;
+	const out = Array.from(array)
+	for (let i = out.length - 1; i > 0; i--) {
+		const r = Math.floor(Math.random() * (i + 1))
+		const tmp = out[i]
+		out[i] = out[r]
+		out[r] = tmp
 	}
-	return array;
+	return out
 }
