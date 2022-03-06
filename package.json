@@ -2,7 +2,7 @@
   "name": "ServerBot",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "author": "@sapphire",
+  "author": "Alliana",
   "license": "UNLICENSE",
   "dependencies": {
     "@discordjs/collection": "^0.4.0",
