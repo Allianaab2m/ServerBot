@@ -8,7 +8,7 @@ Bot.events.interactionCreate = (_, interaction) => {
   switch (interaction.type) {
     case InteractionTypes.ApplicationCommand:
       log.info(
-        `[ApplicationCommand] ${interaction.data.name} command executed`,
+        `[Application Command] ${interaction.data.name} command executed.`,
       );
       Bot.commands.get(interaction.data.name!)?.execute(Bot, interaction);
       break;
