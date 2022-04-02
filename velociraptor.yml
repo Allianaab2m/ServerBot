@@ -1,0 +1,32 @@
+allow:
+  - env
+
+envFile:
+  - .env
+
+scripts:
+  start:
+    desc: Run main script
+    cmd: main.ts
+  
+  lint:
+    desc: Run lint
+    cmd: deno lint
+
+  fmt:
+    desc: Run format
+    cmd: deno fmt
+
+  pre-commit:
+    desc: Lints and formats staged files
+    cmd: |
+      FILES=$(git diff --staged --name-only --diff-filter=ACMR "*.ts")
+        [ -z "$FILES" ] && exit 0
+        echo "$FILES" | xargs deno lint
+        echo "$FILES" | xargs deno fmt
+        echo "$FILES" | xargs git add
+    gitHook: pre-commit
+
+  test:
+    desc: Run the tests
+    cmd: deno test --reload --coverage=cov_profile
