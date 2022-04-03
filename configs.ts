@@ -3,6 +3,7 @@ import { dotEnvConfig } from "./deps.ts";
 // Get the .env file that the user should have created, and get the token
 const env = dotEnvConfig({ export: true });
 const token = env.BOT_TOKEN || "";
+const prefix = 'ab.'
 
 export interface Config {
   token: string;
@@ -12,6 +13,8 @@ export interface Config {
 export const configs = {
   /** Get token from ENV variable */
   token,
+  /** Return Legacy Message Command prefix */
+  prefix,
   /** Get the BotId from the token */
   botId: BigInt(atob(token.split(".")[0])),
   /** The server id where you develop your bot and want dev commands created. */
