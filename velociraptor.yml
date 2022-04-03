@@ -1,5 +1,7 @@
 allow:
   - net
+  - read
+  - write
   - env
 
 envFile:
