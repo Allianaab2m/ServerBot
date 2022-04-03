@@ -10,7 +10,10 @@ Bot.events.interactionCreate = (_, interaction) => {
       log.info(
         `[Application Command] ${interaction.data.name} command executed.`,
       );
-      Bot.commands.get(interaction.data.name!)?.execute(Bot, interaction);
+      Bot.commands.get(interaction.data.name!)?.executeInteraction(
+        Bot,
+        interaction,
+      );
       break;
   }
 };
