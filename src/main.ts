@@ -65,7 +65,7 @@ client.on('ready', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand()) return
+  if (!interaction.isChatInputCommand()) return
 
   const command = commands.get(interaction.commandName)
   if (command) {

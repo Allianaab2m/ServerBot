@@ -1,8 +1,8 @@
-import type { SlashCommandBuilder, CommandInteraction } from 'discord.js'
+import type { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
 
 export interface ISlashCommand {
   name: string,
   guildOnly: boolean
-  command: SlashCommandBuilder
-  execute: (interaction: CommandInteraction) => unknown
+  command: SlashCommandBuilder | Omit<SlashCommandBuilder, "addSubcommand", "addSubcommandGroup">
+  execute: (interaction: ChatInputCommandInteraction) => unknown
 }
