@@ -8,7 +8,8 @@
   "private": true,
   "dependencies": {
     "discord.js": "^14.5.0",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
     "typescript": "^4.8.4"
