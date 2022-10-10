@@ -11,4 +11,5 @@ services:
       - ./:/usr/src/app
     command: >
       bash -c "yarn &&
+      yarn run compile &&
       yarn run start"
