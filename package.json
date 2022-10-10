@@ -6,6 +6,9 @@
   "author": "Alliana <56180684+Allianaab2m@users.noreply.github.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "start": "node dist/main.js"
+  },
   "dependencies": {
     "discord.js": "^14.5.0",
     "dotenv": "^16.0.3",
