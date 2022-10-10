@@ -26,7 +26,7 @@ const command: ISlashCommand = {
     .setNameLocalization("ja", "bot名変更")
     .setDescription(description)
     .setDescriptionLocalization("ja", "Botの名前を変更します。")
-    .addStringOption(option => 
+    .addStringOption(option =>
       option
         .setName("botname")
         .setMinLength(3).setMaxLength(32)
@@ -45,10 +45,10 @@ const command: ISlashCommand = {
         interaction.reply({ content: mes.success.en.replace('{botname}', botName) })
       }
     } else {
-      if (interaction.locale === Locale.Japanese ) {
+      if (interaction.locale === Locale.Japanese) {
         interaction.reply({ content: mes.error.inDM.ja })
       } else {
-        interaction.reply({ content: mes.error.inDM.en})
+        interaction.reply({ content: mes.error.inDM.en })
       }
     }
   },

@@ -19,7 +19,7 @@ const command: ISlashCommand = {
     .setNameLocalization("ja", "プレイリスト")
     .setDescription(description)
     .setDescriptionLocalization("ja", "サーバープレイリストのリンクを返します。"),
-  async execute(interaction){
+  async execute(interaction) {
     if (interaction.locale === Locale.Japanese) {
       interaction.reply({
         content: mes.success.ja,

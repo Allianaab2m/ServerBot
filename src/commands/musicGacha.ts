@@ -22,9 +22,9 @@ const mes = {
   }
 }
 
-const randArray = <T> (targetArray: T[], num: number): T[] => {
+const randArray = <T>(targetArray: T[], num: number): T[] => {
   const retArray: T[] = []
-  while(retArray.length < num && targetArray.length > 0) {
+  while (retArray.length < num && targetArray.length > 0) {
     const randIndex = Math.floor(Math.random() * targetArray.length)
     retArray.push(targetArray[randIndex])
     targetArray.splice(randIndex, 1)
@@ -54,7 +54,7 @@ const command: ISlashCommand = {
       const limitedRes = await swa.getPlaylistTracks(playlistURL, { limit: 100, offset: offset })
       const selectedItems = randArray(limitedRes.body.items, pickCount)
 
-      const musicTitles = selectedItems.map(i => { 
+      const musicTitles = selectedItems.map(i => {
         if (i.track!.artists.length > 1) {
           return `${i.track!.name} - ${i.track?.artists[0].name} etc...\n${i.track!.external_urls.spotify}`
         } else {
@@ -62,9 +62,9 @@ const command: ISlashCommand = {
         }
       })
       if (interaction.locale === Locale.Japanese) {
-        interaction.reply({ content: mes.success.ja + "\n" + musicTitles.join('\n')})
+        interaction.reply({ content: mes.success.ja + "\n" + musicTitles.join('\n') })
       } else {
-        interaction.reply({ content: mes.success.en + "\n" + musicTitles.join('\n')})
+        interaction.reply({ content: mes.success.en + "\n" + musicTitles.join('\n') })
       }
     } else {
       if (interaction.locale === Locale.Japanese) {
