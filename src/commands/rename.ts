@@ -4,6 +4,7 @@ import { ISlashCommand } from "../type";
 const name = "rename"
 const description = "Rename bot name."
 
+// TODO: Split into JSON files
 const mes = {
   error: {
     inDM: {
