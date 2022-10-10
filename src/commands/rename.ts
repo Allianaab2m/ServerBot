@@ -1,21 +1,57 @@
-import { ApplyOptions } from '@sapphire/decorators';
-import type { Args } from '@sapphire/framework';
-import { SubCommandPluginCommand, SubCommandPluginCommandOptions } from '@sapphire/plugin-subcommands';
-import type { Message } from 'discord.js';
+import { Locale, SlashCommandBuilder } from "discord.js";
+import { ISlashCommand } from "../type";
 
-@ApplyOptions<SubCommandPluginCommandOptions>({
-	description: 'botの名前を変更します。',
-	options: ['name']
-})
-export class UserCommand extends SubCommandPluginCommand {
-	public async messageRun(message: Message, args: Args) {
-		const oldName = message.guild?.me?.displayName;
-		const newName = args.getOption('name');
-		if (newName == null) {
-			return message.reply('botの名前が指定されていません。\n`ab.rename --name=[新しい名前]`と入力してください。');
-		} else if (newName.length >= 27) {
-			return message.reply('botの名前は27文字以内にしてください。');
-		}
-		return message.reply(`botの名前を${oldName}から${newName}に変更しました。`);
-	}
+const name = "rename"
+const description = "Rename bot name."
+
+// TODO: Split into JSON files
+const mes = {
+  error: {
+    inDM: {
+      ja: "このコマンドはDMで実行できません。",
+      en: "This command cannot execute in Direct Message channel."
+    }
+  },
+  success: {
+    ja: "bot名を「{botname}」に変更しました。",
+    en: "Bot name changed to \"{botname}\"."
+  }
 }
+
+const command: ISlashCommand = {
+  name,
+  guildOnly: true,
+  command: new SlashCommandBuilder()
+    .setName(name)
+    .setNameLocalization("ja", "bot名変更")
+    .setDescription(description)
+    .setDescriptionLocalization("ja", "Botの名前を変更します。")
+    .addStringOption(option => 
+      option
+        .setName("botname")
+        .setMinLength(3).setMaxLength(32)
+        .setDescription("Bot name")
+        .setDescriptionLocalization("ja", "変更したいbot名を入力してください。")
+        .setRequired(true)
+    ),
+  async execute(interaction) {
+    if (interaction.guild) {
+      const botName = interaction.options.getString("botname", true)
+      const bot = await interaction.guild.members.fetchMe()
+      bot.setNickname(botName)
+      if (interaction.locale === Locale.Japanese) {
+        interaction.reply({ content: mes.success.ja.replace('{botname}', botName) })
+      } else {
+        interaction.reply({ content: mes.success.en.replace('{botname}', botName) })
+      }
+    } else {
+      if (interaction.locale === Locale.Japanese ) {
+        interaction.reply({ content: mes.error.inDM.ja })
+      } else {
+        interaction.reply({ content: mes.error.inDM.en})
+      }
+    }
+  },
+}
+
+export default command
